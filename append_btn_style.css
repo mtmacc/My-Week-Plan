@@ -1,0 +1,7 @@
+.action-btn.delete:hover {
+    color: #c0392b;
+}
+
+.action-btn.add-sub:hover {
+    color: #27ae60;
+}

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>خطة الأسبوع (Week Plan)</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Indie+Flower&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="desk-background">
+        <div class="paper-sheet">
+            <div class="holes"></div>
+            <header>
+                <h1>جدول الأسبوع</h1>
+                <div class="week-plan-badge">Week Plan</div>
+
+                <div class="date-range-container">
+                    <div class="date-field">
+                        <label>من:</label>
+                        <input type="date" id="week-start">
+                    </div>
+                    <div class="date-field">
+                        <label>إلى:</label>
+                        <input type="date" id="week-end">
+                    </div>
+                </div>
+
+                <div class="progress-container">
+                    <span id="progress-score">0%</span>
+                </div>
+
+                <div class="controls-group">
+                    <button id="reset-week-btn" class="sketch-btn reset-btn" title="أسبوع جديد (مسح الصح)"
+                        aria-label="New Week">
+                        <span>🔄</span>
+                    </button>
+                    <button id="print-btn" class="sketch-btn print-btn" title="طباعة الجدول" aria-label="Print">
+                        <span>🖨️</span>
+                    </button>
+                </div>
+            </header>
+
+            <div class="input-area">
+                <input type="text" id="new-task-input" placeholder="اكتب المهمة هنا..." aria-label="Add a new task">
+                <button id="add-task-btn" class="sketch-btn" aria-label="Add Task">
+                    <span>+</span>
+                </button>
+            </div>
+
+            <!-- Header for the Grid -->
+            <div class="grid-header">
+                <div class="header-cell task-header">المهمة</div>
+                <div class="header-cell day-header">سبت</div>
+                <div class="header-cell day-header">أحد</div>
+                <div class="header-cell day-header">إثنين</div>
+                <div class="header-cell day-header">ثلاثاء</div>
+                <div class="header-cell day-header">أربعاء</div>
+                <div class="header-cell day-header">خميس</div>
+                <div class="header-cell day-header">جمعة</div>
+            </div>
+
+            <div id="task-list" class="notebook-lines">
+                <!-- Tasks injected here -->
+            </div>
+
+            <div class="empty-state" id="empty-state">
+                <p>الجدول فاضي... حط خططك! ✏️</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

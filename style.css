@@ -1,0 +1,517 @@
+:root {
+    --paper-color: #fdfbf7;
+    --line-color: #aebacf;
+    --margin-color: #eab4b4;
+    --ink-color: #2c3e50;
+    --font-script-ar: 'Aref Ruqaa', serif;
+    --font-script-en: 'Indie Flower', cursive;
+    --grid-col-layout: 2fr repeat(7, 1fr);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #333;
+    background-image: url('data:image/svg+xml,%3Csvg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="%23444" fill-opacity="0.4" fill-rule="evenodd"%3E%3Cpath d="M0 40L40 0H20L0 20M40 40V20L20 40"/%3E%3C/g%3E%3C/svg%3E');
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    font-family: var(--font-script-ar);
+    color: var(--ink-color);
+}
+
+.paper-sheet {
+    background-color: var(--paper-color);
+    width: 900px;
+    /* Fixed robust width */
+    max-width: 95vw;
+    /* Responsive constraint */
+    /* Wider for the table */
+    height: 800px;
+    /* Explicit fixed height */
+    overflow-y: scroll;
+    /* Keep scrollbar always visible or auto */
+    box-shadow: 2px 3px 20px rgba(0, 0, 0, 0.2), 0 0 60px rgba(0, 0, 0, 0.1) inset;
+    position: relative;
+    padding: 40px 60px 40px 20px;
+    background-image: repeating-linear-gradient(transparent, transparent 39px, var(--line-color) 40px);
+    background-attachment: local;
+    background-size: 100% 40px;
+    /* Lock line height background */
+    border-radius: 2px;
+    transform: rotate(-0.5deg);
+}
+
+/* Custom Scrollbar for the paper feel */
+.paper-sheet::-webkit-scrollbar {
+    width: 8px;
+}
+
+.paper-sheet::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.paper-sheet::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+}
+
+.holes {
+    position: absolute;
+    top: 0;
+    right: 15px;
+    bottom: 0;
+    width: 30px;
+    z-index: 2;
+}
+
+.holes::after {
+    content: '';
+    position: absolute;
+    top: 40px;
+    left: 50%;
+    width: 15px;
+    height: 15px;
+    background: #333;
+    border-radius: 50%;
+    box-shadow: 1px 1px 0 rgba(255, 255, 255, 0.5);
+    transform: translateX(-50%);
+    box-shadow:
+        inset 2px 2px 5px rgba(0, 0, 0, 0.5),
+        0 40px 0 #333,
+        0 80px 0 #333,
+        0 120px 0 #333,
+        0 160px 0 #333,
+        0 200px 0 #333,
+        0 240px 0 #333,
+        0 280px 0 #333,
+        0 320px 0 #333,
+        0 360px 0 #333,
+        0 400px 0 #333,
+        0 440px 0 #333,
+        0 480px 0 #333,
+        0 520px 0 #333,
+        0 560px 0 #333,
+        0 600px 0 #333;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 2rem;
+    transform: rotate(1deg);
+}
+
+header h1 {
+    font-size: 3rem;
+    font-weight: 700;
+}
+
+.week-plan-badge {
+    font-family: var(--font-script-en);
+    font-size: 1.5rem;
+    color: #666;
+    border: 3px solid #666;
+    display: inline-block;
+    padding: 0px 10px;
+    border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
+    transform: rotate(-3deg);
+}
+
+.date-range-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 15px;
+    font-family: var(--font-script-ar);
+}
+
+.date-field {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.date-field label {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.date-field input {
+    background: transparent;
+    border: none;
+    border-bottom: 2px dashed #666;
+    font-family: var(--font-script-en);
+    font-size: 1.1rem;
+    color: var(--ink-color);
+    padding: 2px 5px;
+    outline: none;
+    width: 140px;
+}
+
+.input-area {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 30px;
+    padding-right: 40px;
+}
+
+.input-area input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    border-bottom: 3px dashed #666;
+    padding: 5px 10px;
+    font-family: var(--font-script-ar);
+    font-size: 1.5rem;
+    color: var(--ink-color);
+    outline: none;
+}
+
+.sketch-btn {
+    width: 45px;
+    height: 45px;
+    background: transparent;
+    border: 3px solid var(--ink-color);
+    border-radius: 50%;
+    cursor: pointer;
+    font-family: var(--font-script-en);
+    font-size: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50% 45% 40% 50% / 40% 50% 50% 45%;
+}
+
+.grid-header {
+    display: grid;
+    grid-template-columns: var(--grid-col-layout);
+    padding-right: 40px;
+    margin-bottom: 10px;
+    border-bottom: 2px solid var(--ink-color);
+}
+
+.header-cell {
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-align: center;
+    border-bottom: 2px solid var(--ink-color);
+}
+
+.header-cell.day-header {
+    border-right: 2px solid var(--ink-color);
+}
+
+.header-cell.day-header:last-child {
+    border-left: 2px solid var(--ink-color);
+}
+
+.task-item {
+    display: grid;
+    grid-template-columns: var(--grid-col-layout);
+    align-items: center;
+    height: 40px;
+    padding-right: 40px;
+    border-bottom: 1px solid transparent;
+    position: relative;
+    background-image: linear-gradient(to left, transparent 24%, rgba(44, 62, 80, 0.2) 25%, transparent 26%);
+}
+
+.task-col {
+    padding: 0 10px;
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.day-col {
+    border-right: 2px solid var(--ink-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.day-col:last-child {
+    border-left: 2px solid var(--ink-color);
+}
+
+.day-checkbox {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--ink-color);
+    cursor: pointer;
+    border-radius: 3px;
+    transition: all 0.2s;
+}
+
+.day-checkbox:checked {
+    background: transparent;
+}
+
+.day-checkbox:checked::after {
+    content: 'X';
+    display: block;
+    color: var(--ink-color);
+    font-weight: bold;
+    font-family: var(--font-script-en);
+    font-size: 1.2rem;
+    line-height: 16px;
+    text-align: center;
+}
+
+.task-content {
+    width: 100%;
+    background: transparent;
+    border: none;
+    font-family: var(--font-script-ar);
+    font-size: 1.3rem;
+    color: var(--ink-color);
+    outline: none;
+}
+
+/* Action Buttons (Restored Inline) */
+.action-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: #888;
+    margin-left: 5px;
+    padding: 0 5px;
+    font-family: var(--font-script-en);
+    transition: all 0.2s;
+}
+
+.action-btn:hover {
+    color: var(--ink-color);
+    font-weight: bold;
+    transform: scale(1.2);
+}
+
+.action-btn.delete:hover {
+    color: #c0392b;
+}
+
+.action-btn.add-sub:hover {
+    color: #27ae60;
+}
+
+/* Subtasks Indentation & Connectors */
+.subtasks-container {
+    display: block;
+    position: relative;
+    margin-right: 20px;
+}
+
+.task-wrapper.child {
+    position: relative;
+}
+
+.task-wrapper.child::before {
+    content: '';
+    position: absolute;
+    right: -10px;
+    top: -15px;
+    width: 15px;
+    height: 35px;
+    border-right: 2px dashed var(--ink-color);
+    border-bottom: 2px dashed var(--ink-color);
+    border-bottom-right-radius: 10px;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.task-wrapper.child .task-item .task-col {
+    padding-right: 25px;
+}
+
+.day-col.out-of-range {
+    background-color: rgba(0, 0, 0, 0.05);
+    pointer-events: none;
+}
+
+.day-col.out-of-range .day-checkbox {
+    visibility: hidden;
+}
+
+/* Parent Header distinctive style */
+.is-parent-header {
+    background-color: rgba(44, 62, 80, 0.08);
+    /* Distinctive background */
+    font-weight: bold;
+    display: block;
+    /* Break grid layout */
+    padding: 5px 0;
+}
+
+.is-parent-header .task-col {
+    width: 100%;
+    /* Span full width */
+}
+
+/* Hide the day columns for parent rows completely */
+.is-parent-header .day-col {
+    display: none;
+}
+
+.is-parent-header .task-content {
+    font-size: 1.5rem;
+    color: var(--ink-color);
+    border-bottom: 2px solid var(--ink-color);
+    margin-bottom: 2px;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+    .paper-sheet {
+        padding: 20px 10px;
+    }
+
+    .grid-header,
+    .task-item {
+        padding-right: 10px;
+    }
+
+    .header-cell {
+        font-size: 0.8rem;
+    }
+
+    .day-checkbox {
+        width: 15px;
+        height: 15px;
+    }
+
+    .day-checkbox:checked::after {
+        font-size: 0.8rem;
+    }
+}
+
+/* Controls Group (Print + Reset) */
+.controls-group {
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    /* RTL left */
+    display: flex;
+    gap: 10px;
+}
+
+.sketch-btn.print-btn,
+.sketch-btn.reset-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+    border-radius: 50% 40% 60% 50% / 50% 45% 55% 50%;
+}
+
+.sketch-btn.reset-btn:hover {
+    transform: rotate(180deg);
+}
+
+/* Progress Score Badge */
+.progress-container {
+    position: absolute;
+    top: 15px;
+    right: 50px;
+    /* Near the binding holes */
+    width: 60px;
+    height: 60px;
+    border: 3px solid #c0392b;
+    /* Red teacher's pen color */
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: rotate(15deg);
+    box-shadow: 2px 2px 0 rgba(192, 57, 43, 0.2);
+    /* Make it look like a circled grade */
+    border-radius: 55% 45% 50% 40% / 40% 50% 45% 50%;
+}
+
+#progress-score {
+    font-family: var(--font-script-en);
+    font-size: 1.5rem;
+    color: #c0392b;
+    font-weight: bold;
+}
+
+@media print {
+    @page {
+        size: A4 landscape;
+        margin: 0;
+    }
+
+    body {
+        background: none;
+        padding: 0;
+        display: block;
+        height: auto;
+    }
+
+    .desk-background {
+        background: none;
+    }
+
+    .paper-sheet {
+        box-shadow: none;
+        max-width: 100%;
+        width: 100%;
+        margin: 0;
+        border: none;
+        transform: none;
+        height: 175mm !important;
+        /* Fixed height fitting A4 Landscape */
+        min-height: 0;
+        overflow: hidden !important;
+        /* Cut off anything ensuring 1 page */
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        padding: 10px;
+        /* Minimal padding */
+    }
+
+    .input-area,
+    .print-btn,
+    .action-btn,
+    .sketch-btn,
+    .holes,
+    .reset-btn,
+    .progress-container {
+        display: none !important;
+    }
+
+    .date-range-container {
+        display: flex !important;
+        margin-bottom: 20px;
+    }
+
+    .date-field input {
+        border-bottom: none;
+    }
+
+    .task-content {
+        color: #000;
+    }
+
+    .day-checkbox:checked::after {
+        color: #000;
+        text-shadow: none;
+    }
+
+    .grid-header,
+    .task-item {
+        border-bottom-color: #999;
+    }
+
+    header {
+        transform: none;
+    }
+}
